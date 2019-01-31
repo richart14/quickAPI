@@ -8,10 +8,10 @@ import range from 'lodash.range';
 const MAIN_BUTTON_DIAM = 90;
 const CHILD_BUTTON_DIAM = 48;
 // The number of child buttons that fly out from the main button
-const NUM_CHILDREN = 5;
+const NUM_CHILDREN = 4;
 // Hard code the position values of the mainButton
-const M_X = 490;
-const M_Y = 450;
+const M_X = 100;
+const M_Y = window.innerHeight - 100;
 
 //should be between 0 and 0.5 (its maximum value is difference between scale in finalChildButtonStyles a
 // nd initialChildButtonStyles)
@@ -20,14 +20,11 @@ const OFFSET = 0.05;
 const SPRING_CONFIG = { stiffness: 400, damping: 28 };
 
 // How far away from the main button does the child buttons go
-const FLY_OUT_RADIUS = 130,
+const FLY_OUT_RADIUS = 100,
   SEPARATION_ANGLE = 40, //degrees
   FAN_ANGLE = (NUM_CHILDREN - 1) * SEPARATION_ANGLE, //degrees
-  BASE_ANGLE = ((180 - FAN_ANGLE) / 2); // degrees
+  BASE_ANGLE = ((60 - FAN_ANGLE) / 2); // degrees
 
-// Names of icons for each button retreived from fontAwesome, we'll add a little extra just in case 
-// the NUM_CHILDREN is changed to a bigger value
-let childButtonIcons = ['pencil', 'at', 'camera', 'bell', 'comment', 'bolt', 'ban', 'code'];
 
 
 // Utility functions
@@ -50,7 +47,24 @@ export class Menu extends Component {
 
     this.state = {
       isOpen: false,
-      childButtons: []
+      childButtons: [
+        {
+          icon: 'newspaper-o',
+          link: '/news'
+        },
+        {
+          icon: 'cloud',
+          link: '/weather'
+        },
+        {
+          icon: 'youtube',
+          link: '/youtube'
+        },
+        {
+          icon: 'home',
+          link: '/'
+        }
+      ]
     };
 
     // Bind this to the functions
@@ -60,9 +74,6 @@ export class Menu extends Component {
 
   componentDidMount() {
     window.addEventListener('click', this.closeMenu);
-    let childButtons = [];
-
-    this.setState({ childButtons: childButtons.slice(0) });
   }
 
   componentWillUnmount() {
@@ -137,7 +148,7 @@ export class Menu extends Component {
   }
 
   renderChildButtons() {
-    const { isOpen } = this.state;
+    const { isOpen, childButtons } = this.state;
     const targetButtonStylesInitObject = range(NUM_CHILDREN).map(i => {
       return isOpen ? this.finalChildButtonStylesInit(i) : this.initialChildButtonStylesInit();
     });
@@ -244,7 +255,9 @@ export class Menu extends Component {
 									width
 								}}
 							>
-								<i className={"fa fa-" + childButtonIcons[index] + " fa-lg"}></i>
+                <a href={childButtons[index].link} >
+								  <i className={"fa fa-" + childButtons[index].icon + " fa-lg"}></i>
+                </a>
 							</div>
 						)}
 					</div>

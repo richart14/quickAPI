@@ -23,7 +23,8 @@ html, body {
 }
 
 .main-button {
-	position: absolute;
+  position: fixed;
+  bottom: 0;
 	width: 90px;
 	height: 90px;
 	border-radius: 100%;
@@ -38,7 +39,7 @@ html, body {
 }
 
 .child-button {
-	position: absolute;
+	position: fixed;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -48,4 +49,12 @@ html, body {
 	background-color: white;
 	box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px;
 	color: #8898A5;
+}
+
+.child-button > a:link,a:visited,a:hover,a:active {
+  color: black
+}
+
+li, ul {
+  list-style: none;
 }
