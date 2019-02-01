@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Motion, StaggeredMotion, spring } from 'react-motion';
 import range from 'lodash.range';
+import { Link } from 'react-router-dom';
 
 //Constants 
 
@@ -255,9 +256,9 @@ export class Menu extends Component {
 									width
 								}}
 							>
-                <a href={childButtons[index].link} >
+                <Link to={childButtons[index].link} >
 								  <i className={"fa fa-" + childButtons[index].icon + " fa-lg"}></i>
-                </a>
+                </Link>
 							</div>
 						)}
 					</div>
